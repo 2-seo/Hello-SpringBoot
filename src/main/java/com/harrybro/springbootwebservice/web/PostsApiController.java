@@ -6,6 +6,7 @@ import com.harrybro.springbootwebservice.web.dto.PostsResponseDto;
 import com.harrybro.springbootwebservice.web.dto.PostsSaveRequestDto;
 import com.harrybro.springbootwebservice.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

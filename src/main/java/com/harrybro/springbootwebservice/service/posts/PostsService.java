@@ -2,11 +2,13 @@ package com.harrybro.springbootwebservice.service.posts;
 
 import com.harrybro.springbootwebservice.domain.posts.Posts;
 import com.harrybro.springbootwebservice.domain.posts.PostsRepository;
+import com.harrybro.springbootwebservice.web.PostsApiController;
 import com.harrybro.springbootwebservice.web.dto.PostsListResponseDto;
 import com.harrybro.springbootwebservice.web.dto.PostsResponseDto;
 import com.harrybro.springbootwebservice.web.dto.PostsSaveRequestDto;
 import com.harrybro.springbootwebservice.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 
 // javax 아니고 springframework 이다.
@@ -17,6 +19,9 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @RequiredArgsConstructor
@@ -61,11 +66,13 @@ public class PostsService {
     }
 
     public PostsResponseDto findById(Long id) {
+
         Posts post = postsRepository
                 .findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id: " + id));
 
         return new PostsResponseDto(post);
+
     }
 
     @Transactional(readOnly = true)
